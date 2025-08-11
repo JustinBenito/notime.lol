@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useRef} from 'react';
 import PieChartToday from './components/PieChartToday';
 import DaysLeftWeek from './components/DaysLeftWeek';
 import MonthsLeftYear from './components/MonthsLeftYear';
@@ -9,6 +9,8 @@ import GoalTracker from './components/GoalTracker';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import GitHubButton from './components/GithubButton';
 import logo from "./public/timeleft.png"
+import { Swapy } from 'swapy';
+import { createSwapy } from 'swapy';
 
 interface Goal {
   id: string;
@@ -20,6 +22,26 @@ interface Goal {
 function App() {
   const [goals, setGoals] = useLocalStorage<Goal[]>('timeleft-goals', []);
   const [selectedDate, setSelectedDate] = useState<string | undefined>();
+
+  const swapyRef = useRef<Swapy | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+  if (containerRef.current) {
+    swapyRef.current = createSwapy(containerRef.current, {
+      swapMode: 'hover',
+      autoScrollOnDrag: true,
+      animation: 'spring',
+    })
+  }
+
+  return () => {
+    if (swapyRef.current) {
+      swapyRef.current.destroy()
+      swapyRef.current = null
+    }
+  }
+}, [])
 
   const handleGoalAdd = (goal: Omit<Goal, 'id'>) => {
     const newGoal: Goal = {
@@ -39,7 +61,7 @@ function App() {
 
   return (
 
-    <div className="flex overflow-hidden flex-col min-h-screen bg-black text-white p-4">
+    <div className="flex overflow-y-auto flex-col min-h-screen bg-black text-white p-4">
       {/* Header */}
       <header className="flex justify-between items-center pt-1  pb-4 pr-4">
         <div className='flex flex-row gap-2 justify-center items-center'>
@@ -51,43 +73,57 @@ function App() {
 
       {/* Main Grid - fills available space */}
       <div className="flex-1 flex flex-col">
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-y-0">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-y-0" ref={containerRef}>
           {/* Top Row - Time Visualization */}
           <div className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-3">
-            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full">
-              <PieChartToday />
+            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="pie">
+              <div data-swapy-item="pie" className="h-full w-full">
+                <PieChartToday />
+              </div>
             </div>
-            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full">
-              <DaysLeftWeek />
+            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="week">
+              <div data-swapy-item="week" className="h-full w-full">
+                <DaysLeftWeek />
+              </div>
             </div>
-            <div className="border-2 border-b-0 border-dashed border-gray-700 h-full">
-              <MonthsLeftYear />
+            <div className="border-2 border-b-0 border-dashed border-gray-700 h-full" data-swapy-slot="months">
+              <div data-swapy-item="months" className="h-full w-full">
+                <MonthsLeftYear />
+              </div>
             </div>
           </div>
           {/* Middle Row - Metrics and Clock */}
           <div className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-2">
-            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full">
-              <MotivationalMetrics />
+            <div className="border-2 border-b-0 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="metric">
+              <div data-swapy-item="metric" className="h-full w-full">
+                <MotivationalMetrics />
+              </div>
             </div>
-            <div className="border-2 border-b-0 border-dashed border-gray-700 h-full">
-              <DotMatrixClock />
+            <div className="border-2 border-b-0 border-dashed border-gray-700 h-full" data-swapy-slot="clock">
+              <div data-swapy-item="clock" className="h-full w-full">
+                <DotMatrixClock />
+              </div>
             </div>
           </div>
           {/* Bottom Row - Year Grid and Goals */}
           <div className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-2">
-            <div className="border-2 border-b-0 md:border-b-2 md:border-r-0 border-dashed border-gray-700 h-full">
-              <YearlyDotsGrid 
+            <div className="border-2 border-b-0 md:border-b-2 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="yearly">
+              <div data-swapy-item="yearly" className="h-full w-full">
+                <YearlyDotsGrid 
                 goals={goals} 
                 onDayClick={handleDayClick}
               />
+              </div>
             </div>
-            <div className="border-2 border-dashed border-gray-700 h-full">
-              <GoalTracker 
+            <div className="border-2 border-dashed border-gray-700 h-full" data-swapy-slot="goals">
+              <div data-swapy-item="goals" className="h-full w-full">
+                <GoalTracker 
                 goals={goals}
                 onGoalAdd={handleGoalAdd}
                 onGoalRemove={handleGoalRemove}
                 selectedDate={selectedDate}
               />
+              </div>
             </div>
           </div>
         </div>
