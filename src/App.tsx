@@ -61,7 +61,7 @@ function App() {
 
   return (
 
-    <div className="flex overflow-y-auto flex-col min-h-screen bg-black text-white p-4">
+    <div className="flex overflow-y-auto flex-col min-h-screen bg-black text-white pt-2 px-4">
       {/* Header */}
       <header className="flex justify-between items-center pt-1  pb-4 pr-4">
         <div className='flex flex-row gap-2 justify-center items-center'>
@@ -130,7 +130,7 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className='flex w-full flex-col items-center justify-center px-4 py-4 text-white md:px-8 lg:px-16'>
+      <footer className='flex w-full flex-col items-center justify-center px-4 py-4 text-white '>
         <div className='text-center'>
           <div>
             Made with 🩵 by

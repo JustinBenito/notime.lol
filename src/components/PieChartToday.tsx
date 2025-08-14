@@ -54,7 +54,7 @@ const PieChartToday: React.FC = () => {
   // ].join(' ');
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 h-full">
+    <div className="flex flex-col items-center justify-center p-4 h-full">
       <div className="relative flex items-center justify-center mb-4">
         <svg width={svgSize} height={svgSize} className="rotate-0">
           {/* Background circle - white */}

@@ -58,7 +58,7 @@ const MotivationalMetrics: React.FC = () => {
   };
 
   return (
-    <div className="p-6 space-y-3">
+    <div className="p-4 space-y-3">
       
       <div className="flex items-center space-x-2">
         <span className="font-bold text-sm text-rose-500">{formatNumber(metrics.weekendsLeft)}</span>
