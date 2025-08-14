@@ -75,7 +75,7 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
           className="relative flex items-center justify-center"
         >
           <div
-            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-200 hover:scale-125 ${!goal ? getDotColor(date, dateString) : ''}`}
+            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-200 hover:scale-125 ${!goal ? getDotColor(date, dateString) : ''}`}
             style={goal ? { backgroundColor: goal.color } : {}}
             onClick={() => onDayClick(dateString)}
             onMouseEnter={() => setHoveredDate(dateString)}
@@ -98,9 +98,9 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
   };
 
   return (
-    <div className="p-6 h-full">
-      <div className="mb-4">
-        <div className="text-white text-sm font-medium mb-2">Year {year}</div>
+    <div className="p-4 h-full">
+      <div className="mb-3">
+        <div className="text-white text-sm font-medium mb-1">Year {year}</div>
         <div className="text-gray-400 text-xs">
           {daysInYear} days • Click a day to add a goal
         </div>
