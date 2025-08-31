@@ -6,6 +6,7 @@ import MotivationalMetrics from './components/MotivationalMetrics';
 import DotMatrixClock from './components/DotMatrixClock';
 import YearlyDotsGrid from './components/YearlyDotsGrid';
 import GoalTracker from './components/GoalTracker';
+import DeathCalendar from './components/DeathCalendar';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import GitHubButton from './components/GithubButton';
 import logo from "./public/timeleft.png"
@@ -105,8 +106,8 @@ function App() {
               </div>
             </div>
           </div>
-          {/* Bottom Row - Year Grid and Goals */}
-          <div className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-2">
+          {/* Bottom Row - Year Grid, Goals, and Death Calendar */}
+          <div className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-3">
             <div className="border-2 border-b-0 md:border-b-2 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="yearly">
               <div data-swapy-item="yearly" className="h-full w-full">
                 <YearlyDotsGrid 
@@ -115,7 +116,7 @@ function App() {
               />
               </div>
             </div>
-            <div className="border-2 border-dashed border-gray-700 h-full" data-swapy-slot="goals">
+            <div className="border-2 border-b-0 md:border-b-2 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="goals">
               <div data-swapy-item="goals" className="h-full w-full">
                 <GoalTracker 
                 goals={goals}
@@ -123,6 +124,11 @@ function App() {
                 onGoalRemove={handleGoalRemove}
                 selectedDate={selectedDate}
               />
+              </div>
+            </div>
+            <div className="border-2 border-dashed border-gray-700 h-full" data-swapy-slot="death">
+              <div data-swapy-item="death" className="h-full w-full">
+                <DeathCalendar />
               </div>
             </div>
           </div>
