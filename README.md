@@ -13,6 +13,7 @@ notime.lol is a time visualization dashboard built with React, TypeScript, Tailw
 - Track your progress through the months of the year
 - View a grid of all days in the year, with color-coded goals
 - Add, view, and remove goals for any day
+- Death calendar showing weeks lived vs weeks remaining in your lifetime
 - Motivational metrics (weekends left, full moons left, etc.)
 - Persistent storage of goals using localStorage
 - Responsive, modern UI with custom font and color themes
@@ -196,6 +197,31 @@ const DotMatrix = ({ char }) => {
   // ...pattern for each digit/colon...
   return (
     <div className="grid grid-cols-3">{...}</div>
+  );
+};
+```
+
+### DeathCalendar
+
+Displays a death calendar showing weeks lived vs weeks remaining in your lifetime. Users can input their birthday and life expectancy to visualize their mortality.
+
+```tsx
+const DeathCalendar: React.FC = () => {
+  const [birthDate, setBirthDate] = useLocalStorage<string>('death-calendar-birthday', '');
+  const [lifeExpectancy, setLifeExpectancy] = useLocalStorage<number>('death-calendar-life-expectancy', 70);
+  
+  const calculateWeeksLived = () => {
+    // Calculate weeks lived based on birth date
+  };
+  
+  const renderGrid = () => {
+    // Render 52x70 grid of weeks with filled squares for weeks lived
+  };
+  
+  return (
+    <div className="grid gap-0.5" style={{ gridTemplateColumns: 'repeat(52, minmax(0, 1fr))' }}>
+      {renderGrid()}
+    </div>
   );
 };
 ```
