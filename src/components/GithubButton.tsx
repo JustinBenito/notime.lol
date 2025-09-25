@@ -29,6 +29,7 @@ const GitHubButton = () => {
       target='_blank'
       rel='noopener noreferrer'
       className='inline-flex border hover:bg-white/10 border-white items-center rounded-md px-4 py-2 text-white shadow transition duration-400 ease-in-out'
+      aria-label={`Star the notime.lol project on GitHub (${stars !== null ? `${stars} stars` : 'loading star count'})`}
     >
       <img src={githubIcon} alt='Github star icon' className='mr-2 h-6 w-6 fill-white text-white' />
       <span className='hidden text-sm font-medium sm:inline'>

@@ -81,6 +81,7 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({
             <button
               onClick={() => onGoalRemove(goal.id)}
               className="text-white hover:text-red-400 transition-colors flex-shrink-0"
+              aria-label={`Delete goal: ${goal.text}`}
             >
               <X size={14} />
             </button>
@@ -90,19 +91,25 @@ const GoalTracker: React.FC<GoalTrackerProps> = ({
 
       <div className="flex-shrink-0">
         {isAddingGoal ? (
-          <form onSubmit={handleSubmit} className="space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-2" aria-label="Add new goal">
+            <label htmlFor="goal-input" className="sr-only">Goal description</label>
             <input
+              id="goal-input"
               type="text"
               value={newGoal}
               onChange={(e) => setNewGoal(e.target.value)}
               placeholder="Enter goal..."
+              aria-describedby="goal-help"
               className="w-full p-2 bg-[#1F2123] border border-gray-700 rounded text-white text-sm placeholder-white focus:outline-none focus:border-blue-500"
               autoFocus
             />
+            <label htmlFor="goal-date" className="sr-only">Goal target date</label>
             <input
+              id="goal-date"
               type="date"
               value={goalDate}
               onChange={(e) => setGoalDate(e.target.value)}
+              aria-describedby="date-help"
               className="w-full p-2 bg-[#1F2123] border border-gray-700 rounded text-white text-sm focus:outline-none focus:border-blue-500"
             />
             <div className="flex space-x-2">

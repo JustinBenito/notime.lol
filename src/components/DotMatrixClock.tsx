@@ -121,7 +121,7 @@ const DotMatrixClock: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      <div className="flex items-center justify-center bg-black p-2 ">
+      <div className="flex items-center justify-center bg-black p-2" role="img" aria-label={`Current time: ${time}`} aria-live="polite">
         <div className="flex items-center">
           {time.split('').map((char, index) => (
             <DotMatrix key={index} char={char} />

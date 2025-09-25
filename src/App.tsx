@@ -38,9 +38,9 @@ function App() {
   };
 
   return (
-    <div className="flex overflow-hidden flex-col h-screen bg-black text-white p-2 sm:p-3">
+    <main className="flex overflow-hidden flex-col h-screen bg-black text-white p-2 sm:p-3">
       {/* Header */}
-      <header className="flex justify-between items-center pb-2 pr-2 sm:pr-4 flex-shrink-0">
+      <header className="flex justify-between items-center pb-2 pr-2 sm:pr-4 flex-shrink-0" role="banner">
         <div className='flex flex-row gap-2 justify-center items-center'>
           <img src={logo} alt="notime app logo with a moon phasing out image" className='rounded-lg w-6 h-6 sm:w-8 sm:h-8' />
           <h1 className="font-bricolage items-center justify-center text-base sm:text-lg font-regular">no<span className='text-rose-500'>time</span>.lol</h1>
@@ -52,7 +52,8 @@ function App() {
       <div className="flex-1 flex flex-col min-h-0 overflow-y-auto lg:overflow-y-hidden">
         <div className=" flex flex-col gap-y-0 h-full">
           {/* Top Row - Time Visualization */}
-          <div className="lg:col-span-12 flex flex-col sm:flex-row h-fit">
+          <section className="lg:col-span-12 flex flex-col sm:flex-row h-fit" aria-label="Time Visualization">
+            <h2 className="sr-only">Time Visualization Dashboard</h2>
             <div className="border-2 border-b-0 sm:border-r-0 py-3 border-dashed border-gray-700 overflow-hidden w-full sm:w-1/3">
               <PieChartToday />
             </div>
@@ -62,18 +63,20 @@ function App() {
             <div className="border-2 border-b-0 py-3 border-dashed border-gray-700 overflow-hidden h-1/3 sm:h-full w-full sm:w-1/3">
               <MonthsLeftYear />
             </div>
-          </div>
+          </section>
           {/* Middle Row - Metrics and Clock */}
-          <div className="lg:col-span-12 flex flex-col sm:flex-row">
+          <section className="lg:col-span-12 flex flex-col sm:flex-row" aria-label="Metrics and Clock">
+            <h2 className="sr-only">Motivational Metrics and Digital Clock</h2>
             <div className="border-2 border-b-0 sm:border-r-0 border-dashed border-gray-700 h-fit overflow-hidden w-full sm:w-1/2">
               <MotivationalMetrics />
             </div>
             <div className="border-2 border-b-0 border-dashed border-gray-700 overflow-hidden w-full sm:w-1/2">
               <DotMatrixClock />
             </div>
-          </div>
+          </section>
           {/* Bottom Row - Year Grid and Goals */}
-          <div className="lg:col-span-12 flex flex-col sm:flex-row h-fit">
+          <section className="lg:col-span-12 flex flex-col sm:flex-row h-fit" aria-label="Year Overview and Goals">
+            <h2 className="sr-only">Year Overview and Goal Tracking</h2>
             <div className="border-2 border-b-0 sm:border-b-2 sm:border-r-0 border-dashed h-full border-gray-700 pb-7 w-full sm:w-1/2 overflow-hidden ">
               <YearlyDotsGrid 
                 goals={goals} 
@@ -88,12 +91,12 @@ function App() {
                 selectedDate={selectedDate}
               />
             </div>
-          </div>
+          </section>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className='flex w-full flex-col items-center justify-center px-2 py-2 text-white  sm:px-4 md:px-8 lg:px-16 flex-shrink-0'>
+      <footer className='flex w-full flex-col items-center justify-center px-2 py-2 text-white  sm:px-4 md:px-8 lg:px-16 flex-shrink-0' role="contentinfo">
         <div className='text-center'>
           <div className="text-sm sm:text-base">
             Made with 🩵 by
@@ -101,7 +104,7 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
 

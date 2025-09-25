@@ -55,8 +55,8 @@ const PieChartToday: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center p-4 h-full">
-      <div className="relative flex items-center justify-center mb-4">
-        <svg width={svgSize} height={svgSize} className="rotate-0">
+      <div className="relative flex items-center justify-center mb-4" role="img" aria-label={`${(100 - elapsedPercentage).toFixed(1)}% of today remaining`}>
+        <svg width={svgSize} height={svgSize} className="rotate-0" aria-hidden="true">
           {/* Background circle - white */}
           <circle
             cx={cx}
@@ -86,7 +86,7 @@ const PieChartToday: React.FC = () => {
           />
         </svg>
       </div>
-      <div className="text-center">
+      <div className="text-center" aria-live="polite">
         <div className="text-white text-sm font-medium">{(100 - elapsedPercentage).toFixed(1)}% of Time left Today</div>
         
       </div>

@@ -75,11 +75,22 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
           className="relative flex items-center justify-center"
         >
           <div
-            className={`w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 hover:scale-125 ${!goal ? getDotColor(date, dateString) : ''}`}
+            className={`w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 hover:scale-125 focus:scale-125 focus:outline-none focus:ring-2 focus:ring-rose-500 ${!goal ? getDotColor(date, dateString) : ''}`}
             style={goal ? { backgroundColor: goal.color } : {}}
             onClick={() => onDayClick(dateString)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onDayClick(dateString);
+              }
+            }}
             onMouseEnter={() => setHoveredDate(dateString)}
             onMouseLeave={() => setHoveredDate(null)}
+            onFocus={() => setHoveredDate(dateString)}
+            onBlur={() => setHoveredDate(null)}
+            tabIndex={0}
+            role="button"
+            aria-label={`${formatDateForTooltip(new Date(dateString))}${goal ? `, Goal: ${goal.text}` : ', Click to add goal'}`}
           />
         </div>
       );
