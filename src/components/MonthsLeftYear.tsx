@@ -75,14 +75,22 @@ const MonthsLeftYear: React.FC = () => {
   const getRemainingMonths = () => months.filter(m => m.status === 'remaining').length;
 
   return (
-    <div className="w-full h-full bg-black rounded-xl p-4 gap-4 flex flex-col justify-between">
-      <div className="flex-1 flex items-center gap-1  justify-between">
+    <div className="w-full h-full bg-black rounded-xl p-2 gap-2 flex flex-col justify-between" role="img" aria-label={`Year progress: ${getRemainingMonths()} months remaining`}>
+      <div className="flex-1 flex items-center gap-1  justify-between" role="group" aria-label="Monthly progress bars">
         {months.map((month, index) => (
           <div
             key={index}
             className="flex-1 h-full max-h-25 relative group cursor-pointer"
             onMouseEnter={() => setHoveredMonth(month.name)}
             onMouseLeave={() => setHoveredMonth(null)}
+            role="img"
+            aria-label={`${month.name}: ${month.status === 'completed' ? 'Completed' : month.status === 'current' ? `${Math.round(month.progress * 100)}% complete` : 'Remaining'}`}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setHoveredMonth(hoveredMonth === month.name ? null : month.name);
+              }
+            }}
           >
             {/* Bar background */}
             <div className="w-full h-full bg-white rounded-sm relative overflow-hidden">
