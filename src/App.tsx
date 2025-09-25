@@ -134,7 +134,7 @@ function App() {
         <div className='text-center'>
           <div>
             Made with 🩵 by
-            <a href='https://www.linkedin.com/in/justinbenito/' className='ml-2 text-[#b5f4ff]'>Justin Benito</a>
+            <a href='https://www.linkedin.com/in/justinbenito/' className='ml-2 underline text-[#b5f4ff]'>Justin Benito</a>
           </div>
         </div>
       </footer>
