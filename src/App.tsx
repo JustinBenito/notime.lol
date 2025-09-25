@@ -112,10 +112,10 @@ function App() {
           {/* Bottom Row - Year Grid and Goals */}
           <section className="flex-1 lg:col-span-12 grid grid-cols-1 md:grid-cols-2">
             <div className="border-2 border-b-0 md:border-b-2 md:border-r-0 border-dashed border-gray-700 h-full" data-swapy-slot="yearly">
-            <h2 className="sr-only">Year Overview and Goal Tracking</h2>
               <div data-swapy-item="yearly" className="h-full w-full">
-                <YearlyDotsGrid 
-                goals={goals} 
+                <h2 className="sr-only">Year Overview and Goal Tracking</h2>
+                <YearlyDotsGrid
+                goals={goals}
                 onDayClick={handleDayClick}
               />
               </div>
