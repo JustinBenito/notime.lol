@@ -23,7 +23,7 @@ notime.lol is a time visualization dashboard built with React, TypeScript, Tailw
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<youruserid>/notime.lol.git
+   git clone https://github.com/JustinBenito/notime.lol.git
    ```
 2. Install dependencies:
    ```bash
