@@ -15,12 +15,12 @@ interface YearlyDotsGridProps {
 const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());
-    }, 1000 * 60 * 60); // Update every hour
-
+    }, 1000 * 60 * 60);
     return () => clearInterval(timer);
   }, []);
 
@@ -29,9 +29,7 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
     return isLeapYear ? 366 : 365;
   };
 
-  const getDateString = (date: Date) => {
-    return date.toISOString().split('T')[0];
-  };
+  const getDateString = (date: Date) => date.toISOString().split('T')[0];
 
   const formatDateForTooltip = (date: Date) => {
     return date.toLocaleDateString('en-US', {
@@ -46,14 +44,10 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
   const daysInYear = getDaysInYear(year);
   const today = getDateString(currentDate);
 
-  const getGoalForDate = (dateString: string) => {
-    return goals.find(goal => goal.date === dateString);
-  };
+  const getGoalForDate = (dateString: string) =>
+    goals.find(goal => goal.date === dateString);
 
   const getDotColor = (date: Date, dateString: string) => {
-    const goal = getGoalForDate(dateString);
-    if (goal) return goal.color;
-    
     if (dateString === today) return 'bg-rose-500';
     if (date < currentDate) return 'bg-gray-400 opacity-20';
     return 'bg-white';
@@ -70,10 +64,7 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
       const goal = getGoalForDate(dateString);
 
       dots.push(
-        <div
-          key={i}
-          className="relative flex items-center justify-center"
-        >
+        <div key={i} className="relative flex items-center justify-center">
           <div
             className={`w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 hover:scale-125 focus:scale-125 focus:outline-none focus:ring-2 focus:ring-rose-500 ${!goal ? getDotColor(date, dateString) : ''}`}
             style={goal ? { backgroundColor: goal.color } : {}}
@@ -84,9 +75,19 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
                 onDayClick(dateString);
               }
             }}
-            onMouseEnter={() => setHoveredDate(dateString)}
+            onMouseEnter={(e) => {
+              setHoveredDate(dateString);
+              setMousePos({ x: e.clientX, y: e.clientY });
+            }}
+            onMouseMove={(e) => {
+              setMousePos({ x: e.clientX, y: e.clientY });
+            }}
             onMouseLeave={() => setHoveredDate(null)}
-            onFocus={() => setHoveredDate(dateString)}
+            onFocus={(e) => {
+              setHoveredDate(dateString);
+              const rect = (e.target as HTMLElement).getBoundingClientRect();
+              setMousePos({ x: rect.left + rect.width / 2, y: rect.top });
+            }}
             onBlur={() => setHoveredDate(null)}
             tabIndex={0}
             role="button"
@@ -110,20 +111,20 @@ const YearlyDotsGrid: React.FC<YearlyDotsGridProps> = ({ goals, onDayClick }) =>
       <div className="grid grid-cols-26 gap-0.5 max-h-70 overflow-visible">
         {renderDots()}
       </div>
-      
-      {/* Portal tooltip outside the grid */}
+
       {hoveredDate && (
-        <div 
+        <div
           className="fixed z-[9999] px-3 py-2 bg-gray-900 border border-gray-600 text-white text-sm rounded-lg shadow-2xl whitespace-nowrap pointer-events-none"
           style={{
-            left: '25%',
-            top: '68%',
-            transform: 'translate(-50%, -50%)'
+            left: mousePos.x + 12,
+            top: mousePos.y - 40,
           }}
         >
           {formatDateForTooltip(new Date(hoveredDate))}
           {getGoalForDate(hoveredDate) && (
-            <div className="mt-1 text-gray-300">Goal: {getGoalForDate(hoveredDate)?.text}</div>
+            <div className="mt-1 text-gray-300">
+              Goal: {getGoalForDate(hoveredDate)?.text}
+            </div>
           )}
         </div>
       )}
