@@ -17,23 +17,81 @@ notime.lol is a time visualization dashboard built with React, TypeScript, Tailw
 - Persistent storage of goals using localStorage
 - Responsive, modern UI with custom font and color themes
 
-## Contributing ?
+## Contributing 🤝
 
-0. Fork this repository
+We welcome contributions! Follow these steps to get started:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/JustinBenito/notime.lol.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open your browser to `http://localhost:5173` (or the port shown in your terminal).
+### 1. Fork the Repository
+
+Click the **Fork** button at the top-right corner of this GitHub page. This creates your own copy of the project under your GitHub account.
+
+### 2. Clone Your Forked Repository
+
+Open your terminal and run the following command (replace `<your-username>` with your GitHub username):
+
+```bash
+git clone https://github.com/<your-username>/notime.lol.git
+```
+
+Then navigate into the project folder:
+
+```bash
+cd notime.lol
+```
+
+### 3. Install Dependencies
+
+Make sure you have [Node.js](https://nodejs.org/) installed, then run:
+
+```bash
+npm install
+```
+
+This will download all the packages the project needs to run.
+
+### 4. Start the Development Server
+
+Run the following command to start the app locally:
+
+```bash
+npm run dev
+```
+
+### 5. Open in Browser
+
+Once the server starts, open your browser and go to:
+
+```
+http://localhost:5173
+```
+
+(Or the URL shown in your terminal)
+
+You should now see the app running locally! 🎉
+
+### 6. Make Your Changes
+
+Create a new branch for your feature or fix:
+
+```bash
+git checkout -b responsive-fix
+
+Make your changes, then commit them:
+
+```bash
+git add .
+git commit -m "Add my awesome feature"
+```
+
+### 7. Push and Create a Pull Request
+
+Push your branch to your forked repository:
+
+```bash
+git push origin responsive-fix
+```
+
+Then go to the original repository on GitHub and click **New Pull Request** to submit your changes for review.
 
 ## Usage
 
