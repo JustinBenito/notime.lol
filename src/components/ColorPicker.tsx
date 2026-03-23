@@ -270,6 +270,9 @@ const ColorPicker: React.FC = () => {
             className="absolute right-0 mt-2 p-4 bg-black border border-gray-700 rounded-lg shadow-xl z-50 w-72"
             role="dialog"
             aria-label="Color picker"
+            aria-modal="true"
+            tabIndex={-1}
+            autoFocus
           >
             <div className="text-xs text-gray-400 mb-3 font-medium tracking-wider uppercase">
               ● Color Matrix
